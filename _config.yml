@@ -23,10 +23,10 @@ repository               : "daviderevignas/daviderevignas.github.io"
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "profile.png"
+  avatar           : "dr_cv_photo.png"
   name             : "Davide Revignas"
   pronouns         : # example: "she/her"  
-  bio              : "Short biography for the left-hand sidebar"
+  bio              : "Soft Matter researcher"
   location         : "Padova, Italy"
   employer         : "University of Padova"
   uri              : # URL
@@ -122,9 +122,18 @@ staticman:
       options:
         format           : "iso8601" # "iso8601" (default), "timestamp-seconds", "timestamp-milliseconds"
 atom_feed:
-  hide                   : false     # change to true to hide the RSS feed in the footer
+  hide                   : true     # change to true to hide the RSS feed in the footer
   path                   : # blank (default) uses feed.xml
 
+# Footer settings
+footer:
+  links: []  # This removes the "Follow" social media links
+
+# Site footer
+minimal_mistakes_skin: "default"  # This helps ensure footer modifications work
+
+# Disable footer sitemap
+include_footer_sitemap: false
 
 # SEO Related
 google_site_verification :
@@ -135,7 +144,7 @@ yandex_site_verification :
 
 # Social Sharing
 twitter:
-  username               : &twitter
+  username               : #&twitter
 facebook:
   username               :
   app_id                 :
@@ -356,3 +365,5 @@ compress_html:
   clippings: all
   ignore:
     envs: development
+
+
