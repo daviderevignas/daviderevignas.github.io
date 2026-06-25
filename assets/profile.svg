@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="900" viewBox="0 0 900 900" role="img" aria-label="Portrait placeholder">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#0f766e"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="900" rx="32" fill="url(#g)"/>
+  <circle cx="450" cy="330" r="145" fill="#f9fafb" opacity="0.92"/>
+  <path d="M190 782c38-175 149-263 260-263s222 88 260 263" fill="#f9fafb" opacity="0.92"/>
+  <text x="450" y="835" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="48" fill="#2dd4bf" font-weight="700">Replace with your photo</text>
+</svg>

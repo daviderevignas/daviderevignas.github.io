@@ -1,0 +1,284 @@
+:root {
+  --dark: #111111;
+  --dark-soft: #2a2520;
+  --light: #f7f2e8;
+  --panel: #fffaf0;
+  --text: #2b2520;
+  --muted: #7a6b5d;
+  --accent: #c9a66b;
+  --accent-dark: #7b5e2f;
+  --max-width: 1050px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--text);
+  background: var(--light);
+  line-height: 1.6;
+}
+
+a {
+  color: var(--accent-dark);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 8%;
+  background: rgba(17, 17, 17, 0.94);
+  backdrop-filter: blur(8px);
+}
+
+.logo {
+  color: white;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.nav-links a {
+  color: white;
+  margin-left: 24px;
+  font-size: 0.95rem;
+}
+
+.menu-button {
+  display: none;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  padding: 7px 14px;
+  color: white;
+  background: transparent;
+  cursor: pointer;
+}
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 120px 24px 80px;
+  color: white;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(201, 166, 107, 0.22), transparent 28%),
+    radial-gradient(circle at 80% 40%, rgba(255, 250, 240, 0.10), transparent 32%),
+    linear-gradient(135deg, rgba(0, 0, 0, 0.98), rgba(42, 37, 32, 0.96));
+}
+
+.hero-content {
+  max-width: 850px;
+}
+
+.eyebrow,
+.section-label {
+  margin: 0 0 10px;
+  color: var(--accent-dark);
+  font-size: 0.85rem;
+  font-weight: bold;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.hero .eyebrow {
+  color: var(--accent);
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(3rem, 8vw, 6rem);
+  letter-spacing: 0.04em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.hero h2 {
+  margin-top: 14px;
+  font-weight: normal;
+  color: var(--accent);
+}
+
+.hero-text {
+  margin-top: 28px;
+  font-size: 1.15rem;
+}
+
+.hero-buttons {
+  margin-top: 36px;
+}
+
+.button {
+  display: inline-block;
+  margin: 8px;
+  padding: 12px 24px;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  color: var(--dark);
+  background: var(--accent);
+  font-weight: bold;
+}
+
+.button:hover {
+  text-decoration: none;
+  background: #d8ba83;
+  border-color: #d8ba83;
+}
+
+.button.secondary {
+  color: white;
+  background: transparent;
+}
+
+.button.secondary:hover {
+  color: var(--dark);
+  background: var(--accent);
+}
+
+.section {
+  padding: 90px 8%;
+  background: var(--light);
+}
+
+.section.alt {
+  background: #eee4d3;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.container.narrow {
+  max-width: 820px;
+}
+
+.two-column {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+}
+
+h2 {
+  margin: 0 0 20px;
+  font-size: 2.3rem;
+  color: var(--dark);
+  line-height: 1.15;
+}
+
+h3 {
+  margin-top: 28px;
+  color: var(--dark-soft);
+}
+
+.portrait {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 12px;
+  background: var(--panel);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.15);
+}
+
+.research-figure {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 12px;
+  background: var(--panel);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.15);
+}
+
+.publication {
+  margin-bottom: 20px;
+  padding: 18px 0;
+  border-bottom: 1px solid #c9bba6;
+}
+
+.publication p {
+  margin: 0;
+}
+
+.small-note {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+footer {
+  padding: 28px;
+  text-align: center;
+  color: white;
+  background: var(--dark);
+}
+
+@media (max-width: 750px) {
+  .navbar {
+    align-items: flex-start;
+    padding: 15px 6%;
+  }
+
+  .menu-button {
+    display: inline-block;
+  }
+
+  .nav-links {
+    display: none;
+    width: 100%;
+    margin-top: 14px;
+  }
+
+  .menu-open .navbar {
+    flex-wrap: wrap;
+  }
+
+  .menu-open .nav-links {
+    display: grid;
+    gap: 10px;
+  }
+
+  .nav-links a {
+    margin-left: 0;
+  }
+
+  .two-column {
+    grid-template-columns: 1fr;
+  }
+
+  .reverse-mobile img {
+    order: 2;
+  }
+
+  .hero h1 {
+    font-size: 3rem;
+  }
+
+  .section {
+    padding: 70px 7%;
+  }
+
+  .research-figure {
+    max-width: 420px;
+  }
+}
