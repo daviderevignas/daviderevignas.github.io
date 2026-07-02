@@ -299,7 +299,7 @@ footer {
 .research-topic {
   display: grid;
   /* grid-template-columns: 320px 1fr; */
-  grid-template-columns: minmax(260px, 300px) 1fr;
+  grid-template-columns: minmax(260px, 500px) 1fr;
   gap: 36px;
   align-items: center;
   margin-top: 40px;
