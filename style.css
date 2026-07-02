@@ -282,3 +282,40 @@ footer {
     max-width: 420px;
   }
 }
+
+.research-gif-row {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.research-gif-row .research-figure {
+  width: 50%;
+  min-width: 0;
+}
+
+
+
+.research-topic {
+  display: grid;
+  /* grid-template-columns: 320px 1fr; */
+  grid-template-columns: minmax(260px, 500px) 1fr;
+  gap: 36px;
+  align-items: center;
+  margin-top: 40px;
+}
+
+
+
+.research-topic-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+  background: var(--panel);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.14);
+}
+
+.research-topic-text h3 {
+  margin-top: 0;
+}
