@@ -104,10 +104,10 @@ a:hover {
 
 .hero h1 {
   margin: 0;
-  font-size: clamp(3rem, 8vw, 6rem);
+  font-size: clamp(3rem, 6vw, 5rem);
   letter-spacing: 0.04em;
   line-height: 1;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
 }
 
 .hero h2 {
@@ -299,7 +299,7 @@ footer {
 .research-topic {
   display: grid;
   /* grid-template-columns: 320px 1fr; */
-  grid-template-columns: minmax(260px, 500px) 1fr;
+  grid-template-columns: minmax(260px, 600px) 1fr;
   gap: 36px;
   align-items: center;
   margin-top: 40px;
@@ -318,4 +318,12 @@ footer {
 
 .research-topic-text h3 {
   margin-top: 0;
+}
+
+.div-logos img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
 }
