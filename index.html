@@ -6,110 +6,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Davide Revignas, postdoctoral researcher." />
   <title>Davide Revignas</title>
-
+  <link rel="stylesheet" href="style.css" />
   <script src="https://cdn.jsdelivr.net/npm/p5@1.11.8/lib/p5.min.js"></script>
 
   <style>
-    :root {
-      --dark: #000000;
-      --dark-soft: #222222;
-      --light: #ffffff;
-      --panel: #f5f5f5;
-      --text: #111111;
-      --muted: #666666;
-      --border: #cccccc;
-      --alt-background: #eeeeee;
-      --max-width: 1050px;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      color: var(--text);
-      background: var(--light);
-      line-height: 1.6;
-    }
-
-    a {
-      color: #000000;
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    .navbar {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 10;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 18px 8%;
-      background: rgba(0, 0, 0, 0.94);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-    }
-
-    .logo {
-      color: #ffffff;
-      font-weight: bold;
-      font-size: 1.1rem;
-    }
-
-    .nav-links a {
-      margin-left: 24px;
-      color: #ffffff;
-      font-size: 0.95rem;
-    }
-
-    .menu-button {
-      display: none;
-      padding: 7px 14px;
-      border: 1px solid rgba(255, 255, 255, 0.35);
-      border-radius: 999px;
-      color: #ffffff;
-      background: transparent;
-      cursor: pointer;
-    }
-
+    /* Animated-name integration. These rules are intentionally local to the hero. */
     .hero {
       position: relative;
-      min-height: 100vh;
-      min-height: 100svh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       overflow: hidden;
-      padding: 110px 24px 70px;
-      color: #ffffff;
-      text-align: center;
-      background: #000000;
+      background: #000;
     }
 
     .hero-content {
       position: relative;
       z-index: 1;
-      width: 100%;
-      max-width: 850px;
     }
 
     .name-sketch-wrap {
       position: relative;
       width: min(100%, 760px);
-      height: clamp(300px, 54vw, 440px);
-      margin: 0 auto 1rem;
-      contain: layout paint;
+      height: clamp(280px, 54vw, 440px);
+      margin: 0 auto 1.25rem;
     }
 
     .name-sketch {
@@ -126,293 +43,25 @@
 
     .sketch-name {
       position: absolute;
-      top: 50%;
-      left: 50%;
+      inset: 50% auto auto 50%;
       z-index: 2;
       width: max-content;
       max-width: 82%;
       margin: 0;
-      padding: 1.15rem 2.4rem;
       transform: translate(-50%, -50%);
-      color: #ffffff;
-      font-size: clamp(1rem, 2vw, 1.65rem);
+      color: #fff;
+      font-size: clamp(1rem, 5.2vw, 2.25rem);
       font-weight: 400;
-      letter-spacing: 0.04em;
-      line-height: 1.05;
+      line-height: 1;
       text-align: center;
+      white-space: nowrap;
       pointer-events: none;
-      isolation: isolate;
     }
 
-    .sketch-name::before {
-      position: absolute;
-      inset: -45% -35%;
-      z-index: -1;
-      content: "";
-      background: radial-gradient(
-        ellipse at center,
-        rgba(0, 0, 0, 1) 0%,
-        rgba(0, 0, 0, 0.92) 35%,
-        rgba(0, 0, 0, 0.55) 60%,
-        rgba(0, 0, 0, 0) 78%
-      );
-    }
-
-    .sketch-name span {
-      display: block;
-    }
-
-    .hero-text {
-      margin-top: 24px;
-      font-size: 1.15rem;
-    }
-
-    .hero-text a {
-      color: #ffffff;
-    }
-
-    .hero-buttons {
-      margin-top: 34px;
-    }
-
-    .button {
-      display: inline-block;
-      margin: 8px;
-      padding: 12px 24px;
-      border: 1px solid #ffffff;
-      border-radius: 999px;
-      color: #000000;
-      background: #ffffff;
-      font-weight: bold;
-    }
-
-    .button:hover {
-      color: #ffffff;
-      background: #333333;
-      border-color: #333333;
-      text-decoration: none;
-    }
-
-    .button.secondary {
-      color: #ffffff;
-      background: transparent;
-    }
-
-    .button.secondary:hover {
-      color: #000000;
-      background: #ffffff;
-      border-color: #ffffff;
-    }
-
-    .section {
-      padding: 90px 8%;
-      background: var(--light);
-    }
-
-    .section.alt {
-      background: var(--alt-background);
-    }
-
-    .container {
-      max-width: var(--max-width);
-      margin: 0 auto;
-    }
-
-    .container.narrow {
-      max-width: 820px;
-    }
-
-    .two-column {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 56px;
-      align-items: center;
-    }
-
-    h2 {
-      margin: 0 0 20px;
-      color: var(--dark);
-      font-size: 2.3rem;
-      line-height: 1.15;
-    }
-
-    h3 {
-      margin-top: 28px;
-      color: var(--dark-soft);
-    }
-
-    .portrait,
-    .research-figure,
-    .research-topic-image,
-    .div-logos img {
-      filter: grayscale(100%);
-    }
-
-    .portrait {
-      display: block;
-      width: 100%;
-      max-width: 300px;
-      height: auto;
-      margin: 0 auto;
-      border-radius: 12px;
-      background: var(--panel);
-      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.15);
-    }
-
-    .research-figure {
-      display: block;
-      width: 100%;
-      max-width: 600px;
-      height: auto;
-      margin: 0 auto;
-      border-radius: 12px;
-      background: var(--panel);
-      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.15);
-    }
-
-    .research-gif-row {
-      display: flex;
-      gap: 1rem;
-      align-items: center;
-    }
-
-    .research-gif-row .research-figure {
-      width: 50%;
-      min-width: 0;
-    }
-
-    .research-topic {
-      display: grid;
-      grid-template-columns: minmax(260px, 600px) 1fr;
-      gap: 36px;
-      align-items: center;
-      margin-top: 40px;
-    }
-
-    .research-topic-image {
-      display: block;
-      width: 100%;
-      height: auto;
-      border-radius: 12px;
-      background: var(--panel);
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.14);
-    }
-
-    .research-topic-text h3 {
-      margin-top: 0;
-    }
-
-    .publication {
-      margin-bottom: 20px;
-      padding: 18px 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .publication p {
-      margin: 0;
-    }
-
-    .small-note {
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    .div-logos img {
-      display: block;
-      width: 100%;
-      max-width: 300px;
-      height: auto;
-      margin: 0 auto;
-    }
-
-    footer {
-      padding: 28px;
-      color: #ffffff;
-      background: var(--dark);
-      text-align: center;
-    }
-
-    @media (max-width: 750px) {
-      .navbar {
-        align-items: flex-start;
-        padding: 15px 6%;
-      }
-
-      .menu-button {
-        display: inline-block;
-      }
-
-      .nav-links {
-        display: none;
-        width: 100%;
-        margin-top: 14px;
-      }
-
-      .menu-open .navbar {
-        flex-wrap: wrap;
-      }
-
-      .menu-open .nav-links {
-        display: grid;
-        gap: 10px;
-      }
-
-      .nav-links a {
-        margin-left: 0;
-      }
-
-      .hero {
-        padding: 92px 18px 58px;
-      }
-
+    @media (max-width: 640px) {
       .name-sketch-wrap {
-        height: 270px;
-        margin-bottom: 0.5rem;
-      }
-
-      .sketch-name {
-        font-size: 1.15rem;
-        padding: 0.9rem 1.6rem;
-      }
-
-      .hero-text {
-        margin-top: 16px;
-        font-size: 0.98rem;
-      }
-
-      .hero-buttons {
-        margin-top: 24px;
-      }
-
-      .button {
-        padding: 10px 18px;
-      }
-
-      .two-column,
-      .research-topic {
-        grid-template-columns: 1fr;
-      }
-
-      .research-topic {
-        gap: 20px;
-      }
-
-      .reverse-mobile img {
-        order: 2;
-      }
-
-      .section {
-        padding: 70px 7%;
-      }
-
-      .research-figure {
-        max-width: 420px;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
+        height: 300px;
+        margin-bottom: 0.75rem;
       }
     }
   </style>
@@ -447,7 +96,7 @@
           class="name-sketch"
           aria-hidden="true"
         ></div>
-        <h1 class="sketch-name"><span>Davide</span><span>Revignas</span></h1>
+        <h1 class="sketch-name">Davide<br>Revignas</h1>
       </div>
       <!-- <h2>postdoctoral researcher @</h2> -->
       <!-- Postdoctoral researcher -->
@@ -735,142 +384,119 @@
 
   <script>
     const nameSketch = (p) => {
-      const MOBILE_BREAKPOINT = 750;
-      const yFac = 0.001;
-      const differentialYFac = 0.002;
+      const nPoints = 420;
+      const noiseIntensity = 40;
       const noiseSpeed = 20;
+      const nLines = 130;
+      const yFac = 0.001;
+      const differentialYFac = 0.0008;
       const baseRadius = 220;
 
       let host;
-      let hero;
-      let profile;
-      let isHeroVisible = true;
-      let resizeTimer;
-
-      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-      function chooseProfile() {
-        const lowPowerDevice = navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4;
-        const mobile = window.innerWidth <= MOBILE_BREAKPOINT || lowPowerDevice;
-
-        profile = mobile
-          ? {
-              nPoints: 120,
-              nLines: 36,
-              noiseIntensity: 32,
-              frameRate: 15,
-              strokeWeight: 1.35,
-              strokeAlpha: 58,
-            }
-          : {
-              nPoints: 320,
-              nLines: 100,
-              noiseIntensity: 40,
-              frameRate: 24,
-              strokeWeight: 1.8,
-              strokeAlpha: 50,
-            };
-
-        p.frameRate(profile.frameRate);
-      }
 
       function canvasSize() {
         const bounds = host.getBoundingClientRect();
         return {
-          width: Math.max(240, Math.floor(bounds.width)),
-          height: Math.max(240, Math.floor(bounds.height)),
+          width: Math.max(280, Math.floor(bounds.width)),
+          height: Math.max(260, Math.floor(bounds.height)),
         };
-      }
-
-      function updateLoopState() {
-        if (reducedMotion.matches || document.hidden || !isHeroVisible) {
-          p.noLoop();
-        } else {
-          p.loop();
-        }
       }
 
       p.setup = () => {
         host = document.getElementById('name-sketch');
-        hero = host.closest('.hero');
-
         const size = canvasSize();
         const canvas = p.createCanvas(size.width, size.height);
         canvas.parent(host);
 
         p.pixelDensity(1);
-        p.noiseDetail(3, 0.5);
-        chooseProfile();
+        p.frameRate(30);
+        p.rectMode(p.CENTER);
+        p.textAlign(p.CENTER, p.CENTER);
+        p.noiseDetail(4, 0.5);
 
-        const observer = new IntersectionObserver(
-          ([entry]) => {
-            isHeroVisible = entry.isIntersecting;
-            updateLoopState();
-          },
-          { threshold: 0.01 }
-        );
-        observer.observe(hero);
+        const isMobile = window.matchMedia('(max-width: 750px)').matches;
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-        document.addEventListener('visibilitychange', updateLoopState);
-        reducedMotion.addEventListener?.('change', updateLoopState);
-
-        if (reducedMotion.matches) {
+        if (isMobile || prefersReducedMotion) {
           p.noLoop();
-          p.redraw();
         }
       };
 
       p.draw = () => {
         p.background(0);
-        p.stroke(255, 255, 255, profile.strokeAlpha);
-        p.strokeWeight(profile.strokeWeight);
+        p.stroke(255, 255, 255, 50);
+        p.strokeWeight(2);
 
-        const pointSpacingX = p.width / profile.nPoints;
-        const lineSpacingY = p.height / profile.nLines;
+        const pointSpacingX = p.width / nPoints;
+        const lineSpacingY = p.height / nLines;
         const radius = Math.min(baseRadius, p.width * 0.38, p.height * 0.48);
-        const radiusSquared = radius * radius;
         const centerX = p.width / 2;
         const centerY = p.height / 2;
-        const frameBase = p.frameCount * yFac;
 
-        for (let iy = 0; iy < profile.nLines; iy += 1) {
+        for (let iy = 0; iy < nLines; iy += 1) {
           const baseY = iy * lineSpacingY + lineSpacingY / 2;
-          const lineBase = frameBase + p.frameCount * iy * differentialYFac + 100 * iy;
 
-          let x1 = pointSpacingX / 2;
-          let noise1 = profile.noiseIntensity * (p.noise(lineBase) - 0.5);
+          for (let ix = 0; ix < nPoints - 1; ix += 1) {
+            const p1x = ix * pointSpacingX + pointSpacingX / 2;
+            const p2x = (ix + 1) * pointSpacingX + pointSpacingX / 2;
 
-          for (let ix = 0; ix < profile.nPoints - 1; ix += 1) {
-            const x2 = (ix + 1) * pointSpacingX + pointSpacingX / 2;
-            const noise2 = profile.noiseIntensity * (
-              p.noise(lineBase + noiseSpeed * (ix + 1) / profile.nPoints) - 0.5
+            const p1Noise = noiseIntensity * (
+              p.noise(
+                p.frameCount * yFac +
+                p.frameCount * iy * differentialYFac +
+                100 * iy +
+                (noiseSpeed * ix) / nPoints
+              ) - 0.5
             );
 
-            const y1 = baseY + noise1;
-            const y2 = baseY + noise2;
-            const dx = x1 - centerX;
-            const dy = y1 - centerY;
+            const p2Noise = noiseIntensity * (
+              p.noise(
+                p.frameCount * yFac +
+                p.frameCount * iy * differentialYFac +
+                100 * iy +
+                (noiseSpeed * (ix + 1)) / nPoints
+              ) - 0.5
+            );
 
-            if (dx * dx + dy * dy < radiusSquared) {
-              p.line(x1, y1, x2, y2);
+            const y1 = baseY + p1Noise;
+            const y2 = baseY + p2Noise;
+            const distanceFromCenter = p.dist(p1x, y1, centerX, centerY);
+
+            if (distanceFromCenter < radius) {
+              p.line(p1x, y1, p2x, y2);
             }
-
-            x1 = x2;
-            noise1 = noise2;
           }
         }
+
+        const rectWidth = radius;
+        const rectHeight = radius / 2;
+        const nRects = 30;
+        const rectReduction = 1.2;
+
+        p.noStroke();
+        p.fill(0, 0, 0, 1.5 * 255 / (nRects - 1));
+        for (let i = 0; i < nRects; i += 1) {
+          const w = Math.max(0, rectWidth - rectReduction * i);
+          const h = Math.max(0, rectHeight - rectReduction * i);
+          p.rect(centerX, centerY, w, h);
+          p.rect(centerX, centerY, w, h);
+        }
+
       };
 
       p.windowResized = () => {
-        window.clearTimeout(resizeTimer);
-        resizeTimer = window.setTimeout(() => {
-          chooseProfile();
-          const size = canvasSize();
-          p.resizeCanvas(size.width, size.height);
-          if (!p.isLooping()) {
-            p.redraw();
-          }
-        }, 120);
+        const size = canvasSize();
+        p.resizeCanvas(size.width, size.height);
+
+        const isMobile = window.matchMedia('(max-width: 750px)').matches;
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        if (isMobile || prefersReducedMotion) {
+          p.noLoop();
+          p.redraw();
+        } else {
+          p.loop();
+        }
       };
     };
 
