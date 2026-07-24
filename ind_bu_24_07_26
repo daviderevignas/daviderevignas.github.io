@@ -7,64 +7,6 @@
   <meta name="description" content="Davide Revignas, postdoctoral researcher." />
   <title>Davide Revignas</title>
   <link rel="stylesheet" href="style.css" />
-  <script src="https://cdn.jsdelivr.net/npm/p5@1.11.8/lib/p5.min.js"></script>
-
-  <style>
-    /* Animated-name integration. These rules are intentionally local to the hero. */
-    .hero {
-      position: relative;
-      overflow: hidden;
-      background: #000;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 1;
-    }
-
-    .name-sketch-wrap {
-      position: relative;
-      width: min(100%, 760px);
-      height: clamp(280px, 54vw, 440px);
-      margin: 0 auto 1.25rem;
-    }
-
-    .name-sketch {
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-    }
-
-    .name-sketch canvas {
-      display: block;
-      width: 100% !important;
-      height: 100% !important;
-    }
-
-    .sketch-name {
-      position: absolute;
-      inset: 50% auto auto 50%;
-      z-index: 2;
-      width: max-content;
-      max-width: 82%;
-      margin: 0;
-      transform: translate(-50%, -50%);
-      color: #fff;
-      font-size: clamp(1rem, 5.2vw, 2.25rem);
-      font-weight: 400;
-      line-height: 1;
-      text-align: center;
-      white-space: nowrap;
-      pointer-events: none;
-    }
-
-    @media (max-width: 640px) {
-      .name-sketch-wrap {
-        height: 300px;
-        margin-bottom: 0.75rem;
-      }
-    }
-  </style>
 </head>
 
 <body>
@@ -90,14 +32,7 @@
     <div class="hero-content">
       <!--Statistical Physics-->
       <!-- <p class="eyebrow">Soft Matter • Biological Physics</p>  -->
-      <div class="name-sketch-wrap">
-        <div
-          id="name-sketch"
-          class="name-sketch"
-          aria-hidden="true"
-        ></div>
-        <h1 class="sketch-name">Davide<br>Revignas</h1>
-      </div>
+      <h1>Davide Revignas</h1>
       <!-- <h2>postdoctoral researcher @</h2> -->
       <!-- Postdoctoral researcher -->
       <p class="hero-text">
@@ -380,116 +315,6 @@
   <footer>
     <p>© 2026 Davide Revignas</p>
   </footer>
-
-
-  <script>
-    const nameSketch = (p) => {
-      const nPoints = 420;
-      const noiseIntensity = 40;
-      const noiseSpeed = 20;
-      const nLines = 130;
-      const yFac = 0.001;
-      const differentialYFac = 0.0008;
-      const baseRadius = 220;
-
-      let host;
-
-      function canvasSize() {
-        const bounds = host.getBoundingClientRect();
-        return {
-          width: Math.max(280, Math.floor(bounds.width)),
-          height: Math.max(260, Math.floor(bounds.height)),
-        };
-      }
-
-      p.setup = () => {
-        host = document.getElementById('name-sketch');
-        const size = canvasSize();
-        const canvas = p.createCanvas(size.width, size.height);
-        canvas.parent(host);
-
-        p.pixelDensity(1);
-        p.frameRate(30);
-        p.rectMode(p.CENTER);
-        p.textAlign(p.CENTER, p.CENTER);
-        p.noiseDetail(4, 0.5);
-
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-          p.noLoop();
-        }
-      };
-
-      p.draw = () => {
-        p.background(0);
-        p.stroke(255, 255, 255, 50);
-        p.strokeWeight(2);
-
-        const pointSpacingX = p.width / nPoints;
-        const lineSpacingY = p.height / nLines;
-        const radius = Math.min(baseRadius, p.width * 0.38, p.height * 0.48);
-        const centerX = p.width / 2;
-        const centerY = p.height / 2;
-
-        for (let iy = 0; iy < nLines; iy += 1) {
-          const baseY = iy * lineSpacingY + lineSpacingY / 2;
-
-          for (let ix = 0; ix < nPoints - 1; ix += 1) {
-            const p1x = ix * pointSpacingX + pointSpacingX / 2;
-            const p2x = (ix + 1) * pointSpacingX + pointSpacingX / 2;
-
-            const p1Noise = noiseIntensity * (
-              p.noise(
-                p.frameCount * yFac +
-                p.frameCount * iy * differentialYFac +
-                100 * iy +
-                (noiseSpeed * ix) / nPoints
-              ) - 0.5
-            );
-
-            const p2Noise = noiseIntensity * (
-              p.noise(
-                p.frameCount * yFac +
-                p.frameCount * iy * differentialYFac +
-                100 * iy +
-                (noiseSpeed * (ix + 1)) / nPoints
-              ) - 0.5
-            );
-
-            const y1 = baseY + p1Noise;
-            const y2 = baseY + p2Noise;
-            const distanceFromCenter = p.dist(p1x, y1, centerX, centerY);
-
-            if (distanceFromCenter < radius) {
-              p.line(p1x, y1, p2x, y2);
-            }
-          }
-        }
-
-        const rectWidth = radius;
-        const rectHeight = radius / 2;
-        const nRects = 30;
-        const rectReduction = 1.2;
-
-        p.noStroke();
-        p.fill(0, 0, 0, 1.5 * 255 / (nRects - 1));
-        for (let i = 0; i < nRects; i += 1) {
-          const w = Math.max(0, rectWidth - rectReduction * i);
-          const h = Math.max(0, rectHeight - rectReduction * i);
-          p.rect(centerX, centerY, w, h);
-          p.rect(centerX, centerY, w, h);
-        }
-
-      };
-
-      p.windowResized = () => {
-        const size = canvasSize();
-        p.resizeCanvas(size.width, size.height);
-        p.redraw();
-      };
-    };
-
-    new p5(nameSketch);
-  </script>
 
   <script>
     document.querySelectorAll('.nav-links a').forEach(link => {
