@@ -393,6 +393,29 @@
       const baseRadius = 220;
 
       let host;
+      let staticSketch = false;
+      let lastCanvasWidth = 0;
+      let lastCanvasHeight = 0;
+
+      function shouldUseStaticSketch() {
+        const mobileClientHint = navigator.userAgentData?.mobile === true;
+        const mobileUserAgent = /Android|iPhone|iPad|iPod|Mobile|IEMobile|Opera Mini/i.test(
+          navigator.userAgent
+        );
+        const compactTouchDevice =
+          window.matchMedia('(pointer: coarse)').matches &&
+          Math.min(window.screen.width, window.screen.height) <= 900;
+        const prefersReducedMotion = window.matchMedia(
+          '(prefers-reduced-motion: reduce)'
+        ).matches;
+
+        return (
+          mobileClientHint ||
+          mobileUserAgent ||
+          compactTouchDevice ||
+          prefersReducedMotion
+        );
+      }
 
       function canvasSize() {
         const bounds = host.getBoundingClientRect();
@@ -414,10 +437,11 @@
         p.textAlign(p.CENTER, p.CENTER);
         p.noiseDetail(4, 0.5);
 
-        const isMobile = window.matchMedia('(max-width: 750px)').matches;
-        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        staticSketch = shouldUseStaticSketch();
+        lastCanvasWidth = size.width;
+        lastCanvasHeight = size.height;
 
-        if (isMobile || prefersReducedMotion) {
+        if (staticSketch) {
           p.noLoop();
         }
       };
@@ -482,18 +506,32 @@
           p.rect(centerX, centerY, w, h);
         }
 
+        // On phones, force the sketch to stop after its first completed frame.
+        if (staticSketch) {
+          p.noLoop();
+        }
       };
 
       p.windowResized = () => {
         const size = canvasSize();
+        const sizeChanged =
+          size.width !== lastCanvasWidth || size.height !== lastCanvasHeight;
+
+        staticSketch = shouldUseStaticSketch();
+
+        // Mobile browsers frequently emit resize events when the address bar moves.
+        // Do nothing unless the actual canvas dimensions changed.
+        if (!sizeChanged) {
+          return;
+        }
+
+        lastCanvasWidth = size.width;
+        lastCanvasHeight = size.height;
         p.resizeCanvas(size.width, size.height);
 
-        const isMobile = window.matchMedia('(max-width: 750px)').matches;
-        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-        if (isMobile || prefersReducedMotion) {
+        if (staticSketch) {
           p.noLoop();
-          p.redraw();
+          p.redraw(1);
         } else {
           p.loop();
         }
